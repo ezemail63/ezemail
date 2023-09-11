@@ -19,7 +19,7 @@ return(
                     <div className="dlabnav">
                     <ul className="metismenu" id="menu">
                         <li> <Link className="has-arrow" href="/dashbord" robotoregular="true"  ><FontAwesomeIcon icon={faHouse}/><span className='nav-text'>Dashboard</span> </Link></li>
-                        <li className="mm-active"><Link href="#" robotoregular="true"> <FontAwesomeIcon icon={faUser}/> <span className='nav-text'>Profile</span> </Link> </li>
+                        <li className="mm-active"><Link href="/profile" robotoregular="true"> <FontAwesomeIcon icon={faUser}/> <span className='nav-text'>Profile</span> </Link> </li>
                         <li><Link href="#" robotoregular="true"> <FontAwesomeIcon icon={faUsers} /> <span className='nav-text'>User Management </span></Link></li>
                     </ul>
                     
