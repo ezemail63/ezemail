@@ -64,9 +64,10 @@ const Dashbord=()=>{
                                 <button type="button">Search</button>
                                 </form>
                               </div>
-                              <div className='add-more'>
+{                           localStorage && localStorage.type && localStorage.type == 'admin' &&   
+                                <div className='add-more'>
                                 <Link href='/addmore'>Add More</Link>
-                              </div>
+                              </div>}
                               <div className='lms-table-wrap'>
                                <Table striped bordered hover >
                                 <thead>
@@ -161,7 +162,6 @@ const Dashbord=()=>{
                 </div>
             </div>
          </div>
-         
         </>
     )
 }
