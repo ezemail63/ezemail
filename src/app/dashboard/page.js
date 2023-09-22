@@ -4,12 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import $ from "jquery";
-import { React,useState } from 'react';
+import { React,useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import Sidebaar from '../template/Sidebaar';
 import Header from '../template/Header';
 import Link from "next/link"
 import Pagination from 'react-bootstrap/Pagination';
+import axios from 'axios';
 
 const Dashbord=()=>{
     const sideCanvasActive= () =>{ 
@@ -18,6 +19,10 @@ const Dashbord=()=>{
         $(".app__offcanvas-overlay").removeClass("overlay-open");
     
     }
+    const [sideBarAccess, setSideBarAccess] = useState({
+        users: false
+    });
+    const [serviceStoreData, setServiceStoreData] = useState([]);
     let active = 2;
     let items = [];
     for (let number = 1; number <= 5; number++) {
@@ -27,6 +32,32 @@ const Dashbord=()=>{
         </Pagination.Item>,
     );
     }
+    const getServiceData = async () => {
+
+        axios.get(`${process.env.API_BASE_URL}services.php`)
+          .then(res => {
+              const data = res.data.serviceData.map((item) => {
+                return {
+                  id: item.id,
+                  name: item.service_name,
+                  status: item.status
+                }
+            }
+          )
+          setServiceStoreData(data);
+        })
+        .catch(err => {
+         })
+     } 
+    useEffect(() => {
+        if(localStorage && localStorage.length > 0 && localStorage.type && localStorage.type != "user"){
+            setSideBarAccess({
+                users : true
+            })
+            getServiceData();
+        }
+
+        }, []);
     return(
         
         <>

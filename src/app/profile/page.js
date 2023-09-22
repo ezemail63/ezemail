@@ -11,12 +11,29 @@ import MyVerticallyCenteredModal from '../template/ProfileEdit'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import axios from 'axios';
 
 const Profile=()=>{
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [msg, setFormStatus] = useState('')
+  const [closeIcon, setCloseIcon] = useState(false)
+  const [isValidEmail, setIsValidEmail] = useState(false)
+  const [submitBtn, setSubmitBtn] = useState({})
   const [modalShow, setModalShow] = useState(false);
+  const [inputData, setInputData] = useState({
+    companyname : '',
+    title : '',
+    name : '',
+    email : '',
+    contactno : '',
+    about : '',
+    location : '',
+    image : '',
+    logo : '',
+    userid :''
+})
   const [profileData, setProfileData] = useState({
     companyname : '',
     title : '',
@@ -29,10 +46,88 @@ const Profile=()=>{
     logo : '',
     userid : ''
 });
+const [sideBarAccess, setSideBarAccess] = useState({
+  users: false
+});
+const inputChangeData =(event)=> {
+  const {name, value} = event.target;
+  setInputData((valuePre)=>{
+ return{
+   ...valuePre,
+   [name]:value
+ }
+})
+}
   const sideCanvasActive= () =>{ 
     $(".expovent__sidebar").removeClass("collapsed");
     $(".expovent__sidebar").removeClass("open");
     $(".app__offcanvas-overlay").removeClass("overlay-open");
+  }
+  const onSubmit = (e) => {
+    e.preventDefault()
+    setSubmitBtn({
+      padding: '1rem 0rem',
+      display: 'block',
+      color: 'red'
+    })
+    if(inputData && inputData.email){
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      setIsValidEmail(emailRegex.test(inputData.email));
+    }
+    if(!inputData.name){
+      setFormStatus("Name can not be blank.")
+      setCloseIcon(true);
+    }else if(!inputData.title){
+      setFormStatus("Title can not be blank.")
+      setCloseIcon(true);   
+    }else{
+      inputData.userid = profileData && profileData.userid ? profileData.userid : '';
+      axios.post(`${process.env.API_BASE_URL}updateProfile.php`,inputData,{
+        headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+        .then(res => {
+            const data = res.data;
+            if(res &&  res.data && res.data.error && res.data.error.length > 0){
+                setFormStatus(res.data.error);
+                setCloseIcon(true);
+            }else if(res &&  res.data && res.data.msg && res.data.msg.length > 0){
+                    //Router.push('/thankyou')
+                    setFormStatus("Update Successfully.");
+                    //localStorage.clear();
+                    localStorage.setItem('name', inputData.name);
+                    localStorage.setItem('title', inputData.title);
+                    localStorage.setItem('companyname', inputData.companyname);
+                    localStorage.setItem('contactno', inputData.contactno);
+                    localStorage.setItem('about', inputData.about);
+                    localStorage.setItem('location', inputData.location);
+                    setProfileData({
+                      companyname : inputData.companyname,
+                      title : inputData.title,
+                      name : inputData.name,     
+                      contactno : inputData.contactno ? inputData.contactno : '',
+                      about : inputData.about ? inputData.about : '',
+                      location : inputData.location ? inputData.location : '',
+                      email : localStorage.email,
+                      image : localStorage.image ? localStorage.image : '',
+                      logo : localStorage.logo?localStorage.logo:'',
+                      userid : localStorage.userid
+                  });
+
+                    setCloseIcon(true);
+                    setSubmitBtn({
+                      padding: '1rem 0rem',
+                      display: 'block',
+                      color: '#46c737'
+                    })
+                  }
+            
+  
+      })
+      .catch(err => {
+       })
+    }
   }
   useEffect(() => {
     if(localStorage.email && localStorage.userid && localStorage.name){
@@ -44,11 +139,28 @@ const Profile=()=>{
             contactno : localStorage.contactno ? localStorage.contactno : '',
             about : localStorage.about ? localStorage.about : '',
             location : localStorage.location ? localStorage.location : '',
-            image : localStorage.image ? localStorage.image : 'https://reseller.ezrankings.in//dashboard/images/avtar.png',
-            logo : localStorage.logo ? localStorage.logo :'https://reseller.ezrankings.in//dashboard/images/avtar.png',
+            image : localStorage.image ? localStorage.image : '',
+            logo : localStorage.logo,
+            userid : localStorage.userid
+        });
+        setInputData({
+            companyname : localStorage.companyname,
+            title : localStorage.title,
+            name : localStorage.name,
+            email : localStorage.email,
+            contactno : localStorage.contactno ? localStorage.contactno : '',
+            about : localStorage.about ? localStorage.about : '',
+            location : localStorage.location ? localStorage.location : '',
+            image : localStorage.image ? localStorage.image : '',
+            logo : localStorage.logo,
             userid : localStorage.userid
         });
     }
+    if(localStorage && localStorage.length > 0 && localStorage.type && localStorage.type=="admin"){
+      setSideBarAccess({
+          users : true
+      })
+  }
     }, []);
  return(
     <>
@@ -58,31 +170,6 @@ const Profile=()=>{
             </div>
             <div className="page__body-wrapper">
               <Header/>
-              <Modal show={show} onHide={handleClose} animation={false}>
-              <Modal.Header closeButton>
-                <Modal.Title>Update Profile</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-              <Form>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="name@example.com" />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                  <Form.Label>Example textarea</Form.Label>
-                  <Form.Control as="textarea" rows={3} />
-                </Form.Group>
-              </Form>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary" onClick={handleClose}>
-                  Save Changes
-                </Button>
-              </Modal.Footer>
-              </Modal>
               <div className="app__slide-wrapper">
                   <div className="row">
                       <div className="col-xl-12">
@@ -188,7 +275,13 @@ const Profile=()=>{
          </div>
          <MyVerticallyCenteredModal
           show={modalShow}
-          onHide={() => setModalShow(false)}
+          onHide={() => setModalShow(false)
+          }
+          inputData={inputData}
+          inputChangeData={inputChangeData}
+          onSubmit={onSubmit}
+          msg={msg}
+
       />
     </>
  )

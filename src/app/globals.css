@@ -659,7 +659,16 @@ add more page css start here
   background: #fbfbfb;
   color: #111111;
 }
-
+.add-more-form .form-group select{
+  display: block;
+  height: 50px;
+  width: 100%;
+  border: 5px solid #e6e6e68a;
+  padding: 0 8px;
+  border-radius: 4px;
+  background: #fbfbfb;
+  color: #111111;
+}
 .add-more-form .form-group input:focus {
   border-color: #ffc107;
   outline: none;

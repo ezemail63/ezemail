@@ -89,7 +89,7 @@ function Login() {
                       localStorage.setItem("contactno", data.userData[0]['contactno']);
                       localStorage.setItem("about", data.userData[0]['about']);  
                       localStorage.setItem("location", data.userData[0]['location']);
-                      router.push('/dashbord')
+                      router.push('/dashboard')
                   }
                 }
           }
