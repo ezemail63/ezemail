@@ -83,20 +83,20 @@ const Users=()=>{
          })
      }
       useEffect(() => {
-          if(localStorage.title && localStorage.email && localStorage.logo && localStorage.companyname && localStorage.userid && localStorage.name){
-              setProfileData({
-                  companyname : localStorage.companyname,
-                  title : localStorage.title,
-                  name : localStorage.name,
-                  email : localStorage.email,
-                  contactno : localStorage.contactno ? localStorage.contactno : '',
-                  about : localStorage.about ? localStorage.about : '',
-                  location : localStorage.location ? localStorage.location : '',
-                  image : localStorage.image ? localStorage.image : '',
-                  logo : localStorage.logo,
-                  userid : localStorage.userid
-              });
-          }
+          // if(localStorage.title && localStorage.email && localStorage.logo && localStorage.companyname && localStorage.userid && localStorage.name){
+          //     setProfileData({
+          //         companyname : localStorage.companyname,
+          //         title : localStorage.title,
+          //         name : localStorage.name,
+          //         email : localStorage.email,
+          //         contactno : localStorage.contactno ? localStorage.contactno : '',
+          //         about : localStorage.about ? localStorage.about : '',
+          //         location : localStorage.location ? localStorage.location : '',
+          //         image : localStorage.image ? localStorage.image : '',
+          //         logo : localStorage.logo,
+          //         userid : localStorage.userid
+          //     });
+          // }
           fetchData(currentPage);
     
           }, [currentPage]);
@@ -138,7 +138,7 @@ const Users=()=>{
                                 </form>
                               </div> */}
                             { 
-                             localStorage && localStorage.type && localStorage.type == 'admin' &&   
+                             //localStorage && localStorage.type && localStorage.type == 'admin' &&   
                                 <div className='add-more'>
                                 <Link href='/add-user'>Add User</Link>
                               </div>}

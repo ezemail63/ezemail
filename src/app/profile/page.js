@@ -96,12 +96,12 @@ const inputChangeData =(event)=> {
                     //Router.push('/thankyou')
                     setFormStatus("Update Successfully.");
                     //localStorage.clear();
-                    localStorage.setItem('name', inputData.name);
-                    localStorage.setItem('title', inputData.title);
-                    localStorage.setItem('companyname', inputData.companyname);
-                    localStorage.setItem('contactno', inputData.contactno);
-                    localStorage.setItem('about', inputData.about);
-                    localStorage.setItem('location', inputData.location);
+                    // localStorage.setItem('name', inputData.name);
+                    // localStorage.setItem('title', inputData.title);
+                    // localStorage.setItem('companyname', inputData.companyname);
+                    // localStorage.setItem('contactno', inputData.contactno);
+                    // localStorage.setItem('about', inputData.about);
+                    // localStorage.setItem('location', inputData.location);
                     setProfileData({
                       companyname : inputData.companyname,
                       title : inputData.title,
@@ -109,10 +109,10 @@ const inputChangeData =(event)=> {
                       contactno : inputData.contactno ? inputData.contactno : '',
                       about : inputData.about ? inputData.about : '',
                       location : inputData.location ? inputData.location : '',
-                      email : localStorage.email,
-                      image : localStorage.image ? localStorage.image : '',
-                      logo : localStorage.logo?localStorage.logo:'',
-                      userid : localStorage.userid
+                      // email : localStorage.email,
+                      // image : localStorage.image ? localStorage.image : '',
+                      // logo : localStorage.logo?localStorage.logo:'',
+                      // userid : localStorage.userid
                   });
 
                     setCloseIcon(true);
@@ -130,37 +130,37 @@ const inputChangeData =(event)=> {
     }
   }
   useEffect(() => {
-    if(localStorage.email && localStorage.userid && localStorage.name){
-        setProfileData({
-            companyname : localStorage.companyname,
-            title : localStorage.title,
-            name : localStorage.name,
-            email : localStorage.email,
-            contactno : localStorage.contactno ? localStorage.contactno : '',
-            about : localStorage.about ? localStorage.about : '',
-            location : localStorage.location ? localStorage.location : '',
-            image : localStorage.image ? localStorage.image : '',
-            logo : localStorage.logo,
-            userid : localStorage.userid
-        });
-        setInputData({
-            companyname : localStorage.companyname,
-            title : localStorage.title,
-            name : localStorage.name,
-            email : localStorage.email,
-            contactno : localStorage.contactno ? localStorage.contactno : '',
-            about : localStorage.about ? localStorage.about : '',
-            location : localStorage.location ? localStorage.location : '',
-            image : localStorage.image ? localStorage.image : '',
-            logo : localStorage.logo,
-            userid : localStorage.userid
-        });
-    }
-    if(localStorage && localStorage.length > 0 && localStorage.type && localStorage.type=="admin"){
-      setSideBarAccess({
-          users : true
-      })
-  }
+  //   if(localStorage.email && localStorage.userid && localStorage.name){
+  //       setProfileData({
+  //           companyname : localStorage.companyname,
+  //           title : localStorage.title,
+  //           name : localStorage.name,
+  //           email : localStorage.email,
+  //           contactno : localStorage.contactno ? localStorage.contactno : '',
+  //           about : localStorage.about ? localStorage.about : '',
+  //           location : localStorage.location ? localStorage.location : '',
+  //           image : localStorage.image ? localStorage.image : '',
+  //           logo : localStorage.logo,
+  //           userid : localStorage.userid
+  //       });
+  //       setInputData({
+  //           companyname : localStorage.companyname,
+  //           title : localStorage.title,
+  //           name : localStorage.name,
+  //           email : localStorage.email,
+  //           contactno : localStorage.contactno ? localStorage.contactno : '',
+  //           about : localStorage.about ? localStorage.about : '',
+  //           location : localStorage.location ? localStorage.location : '',
+  //           image : localStorage.image ? localStorage.image : '',
+  //           logo : localStorage.logo,
+  //           userid : localStorage.userid
+  //       });
+  //   }
+  //   if(localStorage && localStorage.length > 0 && localStorage.type && localStorage.type=="admin"){
+  //     setSideBarAccess({
+  //         users : true
+  //     })
+  // }
     }, []);
  return(
     <>

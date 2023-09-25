@@ -50,12 +50,12 @@ const Dashbord=()=>{
          })
      } 
     useEffect(() => {
-        if(localStorage && localStorage.length > 0 && localStorage.type && localStorage.type != "user"){
-            setSideBarAccess({
-                users : true
-            })
+        // if(localStorage && localStorage.length > 0 && localStorage.type && localStorage.type != "user"){
+        //     setSideBarAccess({
+        //         users : true
+        //     })
             getServiceData();
-        }
+       // }
 
         }, []);
     return(
@@ -95,7 +95,7 @@ const Dashbord=()=>{
                                 <button type="button">Search</button>
                                 </form>
                               </div>
-{                           localStorage && localStorage.type && localStorage.type == 'admin' &&   
+{                           //localStorage && localStorage.type && localStorage.type == 'admin' &&   
                                 <div className='add-more'>
                                 <Link href='/addmore'>Add More</Link>
                               </div>}

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 const Sidebaar = ()=>{
 const router = useRouter()
 const Logout = ()=>{
-    localStorage.clear();
+    //localStorage.clear();
     router.push("/")
 }
 return(
@@ -25,7 +25,7 @@ return(
                     <ul className="metismenu" id="menu">
                         <li> <Link className="has-arrow" href="/dashboard" robotoregular="true"  ><FontAwesomeIcon icon={faHouse}/><span className='nav-text'>Dashboard</span> </Link></li>
                         <li className="mm-active"><Link href="/profile" robotoregular="true"> <FontAwesomeIcon icon={faUser}/> <span className='nav-text'>Profile</span> </Link> </li>
-{           localStorage && localStorage.type && localStorage.type == 'admin' &&            
+{        //   localStorage && localStorage.type && localStorage.type == 'admin' &&            
                      <li><Link href="/users" robotoregular="true"> <FontAwesomeIcon icon={faUsers} /> <span className='nav-text'>User Management </span></Link></li>}
                     </ul>
                     

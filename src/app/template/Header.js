@@ -13,7 +13,7 @@ const Header =()=>{
             setshHd(!shHd)
     }
     const Logout = ()=>{
-        localStorage.clear();
+        //localStorage.clear();
         router.push("/")
     }
     const sideActive=()=>{
@@ -53,7 +53,9 @@ const Header =()=>{
                         <img src="/assets/images/login.png" alt=""/> 
                         </div>
                         <div className="user__content">
-                        <span>{localStorage && localStorage.name ? localStorage.name : ''}</span>
+                        <span>
+                            {/* {localStorage && localStorage.name ? localStorage.name : ''} */}
+                            </span>
                         <FontAwesomeIcon icon={faChevronDown} />
                         </div>
                     </div>

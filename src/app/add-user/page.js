@@ -137,21 +137,21 @@ const onSubmit = (e) => {
    }
  }
  useEffect(() => {
-   if(localStorage.title && localStorage.email && localStorage.logo && localStorage.companyname && localStorage.userid && localStorage.name){
-       setProfileData({
-           companyname : localStorage.companyname,
-           title : localStorage.title,
-           name : localStorage.name,
-           email : localStorage.email,
-           contactno : localStorage.contactno ? localStorage.contactno : '',
-           about : localStorage.about ? localStorage.about : '',
-           location : localStorage.location ? localStorage.location : '',
-           image : localStorage.image ? localStorage.image : '',
-           logo : localStorage.logo,
-           updatedBy : localStorage && localStorage.tokenAuth ? localStorage.tokenAuth : '',
-           userid : localStorage.userid
-       });
-   }
+   // if(localStorage.title && localStorage.email && localStorage.logo && localStorage.companyname && localStorage.userid && localStorage.name){
+   //     setProfileData({
+   //         companyname : localStorage.companyname,
+   //         title : localStorage.title,
+   //         name : localStorage.name,
+   //         email : localStorage.email,
+   //         contactno : localStorage.contactno ? localStorage.contactno : '',
+   //         about : localStorage.about ? localStorage.about : '',
+   //         location : localStorage.location ? localStorage.location : '',
+   //         image : localStorage.image ? localStorage.image : '',
+   //         logo : localStorage.logo,
+   //         updatedBy : localStorage && localStorage.tokenAuth ? localStorage.tokenAuth : '',
+   //         userid : localStorage.userid
+   //     });
+   // }
    }, []);
  return(
     <>
